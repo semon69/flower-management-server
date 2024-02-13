@@ -7,7 +7,14 @@ import { AppError } from '../errors/AppError';
 import { User } from '../modules/user/user.model';
 
 
-const auth = (role: string) => {
+export const USER_ROLE = {
+  manager: 'manager',
+  seller: 'seller'
+} as const;
+
+export type TUserRole = keyof typeof USER_ROLE;
+
+const auth = (...requiredRoles: TUserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
 
     const token = req.headers.authorization;
@@ -30,10 +37,10 @@ const auth = (role: string) => {
     } catch (error) {
       throw new AppError(httpStatus.UNAUTHORIZED, 'Unauthorized Person');
     }
-    const { _id, email } = decoded;
+    const { role, email } = decoded;
 
     // check, is users exists or not
-    const user = await User.findById(_id);
+    const user = await User.findOne({email: email});
 
     if (!user) {
       throw new AppError(httpStatus.NOT_FOUND, 'The user is not found');
@@ -45,12 +52,19 @@ const auth = (role: string) => {
       throw new AppError(httpStatus.UNAUTHORIZED, 'Unauthorized Person');
     }
 
-    if (role !== 'user') {
+    // if (role !== 'user') {
+    //   throw new AppError(
+    //     httpStatus.UNAUTHORIZED,
+    //     'Unauthorized person',
+    //   );
+    // }
+    if (requiredRoles && !requiredRoles.includes(role)) {
       throw new AppError(
         httpStatus.UNAUTHORIZED,
-        'Unauthorized person',
+        'You are not authorized person',
       );
     }
+
     next();
   });
 };

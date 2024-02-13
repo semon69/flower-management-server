@@ -2,11 +2,10 @@ import { Router } from 'express';
 import validateRequest from '../../middleware/validateRequest';
 import { loginValidation, refreshTokenValidation, userValidation } from './user.validation';
 import { userController } from './user.controller';
-import auth from '../../middleware/Auth';
 
 const router = Router();
 
-router.get('/users', auth('user'), userController.totalUsers)
+router.get('/users', userController.totalUsers)
 
 router.post(
   '/register',

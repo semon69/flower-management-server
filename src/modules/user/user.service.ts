@@ -15,7 +15,7 @@ const totalUser = async () => {
 };
 
 const registerUserIntoDb = async (payload: TUser) => {
-  payload.role = 'user';
+  payload.role = 'seller'
   const result = await User.create(payload);
   const { password, ...otherFields } = result.toObject();
   return otherFields;
@@ -35,13 +35,13 @@ const userLogin = async (payload: TLoginUser) => {
     throw new AppError(httpStatus.FORBIDDEN, 'Password do not matched');
   }
 
-  const userData = {
-    _id: user?._id,
-    email: user?.email,
-  };
+  // const userData = {
+  //   role: user?.role,
+  //   email: user?.email,
+  // };
 
   const jwtPayload = {
-    _id: user?._id,
+    role: user?.role,
     email: user?.email,
   };
 
@@ -87,7 +87,7 @@ const refreshToken = async (proposToken: string) => {
   }
 
   const jwtPayload = {
-    _id: user?._id,
+    role: user?.role,
     email: user?.role,
   };
   const token = createToken(
