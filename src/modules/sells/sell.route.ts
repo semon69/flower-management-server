@@ -2,13 +2,13 @@ import { Router } from 'express';
 import validateRequest from '../../middleware/validateRequest';
 import { sellController } from './sell.controller';
 import { sellValidation } from './sell.validation';
-import auth from '../../middleware/Auth';
+import auth, { USER_ROLE } from '../../middleware/Auth';
 
 const router = Router();
 
 router.post(
   '/create-sell',
-  auth('user'),
+  auth(USER_ROLE.seller),
   validateRequest(sellValidation),
   sellController.createsell,
 );
