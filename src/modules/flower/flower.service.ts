@@ -2,7 +2,7 @@
 import httpStatus from 'http-status';
 import { AppError } from '../../errors/AppError';
 import { TFlower } from './flower.interface';
-import { Flower } from './flower.model';
+import { Cupon, Flower } from './flower.model';
 import { ParsedQs } from 'qs';
 
 const createFlowerIntoDb = async (payload: TFlower) => {
@@ -22,7 +22,7 @@ const getFlowersFromDb = async (queryParams: ParsedQs) => {
     fragrance,
     season,
     name,
-    popularity
+    popularity,
   } = queryParams;
 
   // Construct a filter object based on the provided parameters
@@ -77,17 +77,31 @@ const deleteMultipleFlower = async (ids: string[]) => {
   if (results.deletedCount === 0) {
     throw new AppError(
       httpStatus.NOT_FOUND,
-      "No flowers found with the provided IDs"
-    )
+      'No flowers found with the provided IDs',
+    );
   }
   return results;
-}
+};
+
+const createCupon = async (payload: any) => {
+  const results = await Cupon.create(payload);
+
+  return results;
+};
+
+const getSingleCupon = async (cupon: string) => {
+  const result = await Cupon.findOne({
+    cupon,
+  });
+  return result;
+};
 
 export const flowerService = {
   createFlowerIntoDb,
   getFlowersFromDb,
   updateFlowerFromDb,
   deleteFlowerFromDb,
-  deleteMultipleFlower
+  deleteMultipleFlower,
+  createCupon,
+  getSingleCupon,
 };
-

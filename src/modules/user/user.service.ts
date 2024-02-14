@@ -14,8 +14,15 @@ const totalUser = async () => {
   return result;
 };
 
+const updateRole = async (id: string, role: string) => {
+  const result = await User.findByIdAndUpdate(id, {
+    role: role
+  });
+  return result;
+};
+
 const registerUserIntoDb = async (payload: TUser) => {
-  payload.role = 'seller'
+  payload.role = 'user'
   const result = await User.create(payload);
   const { password, ...otherFields } = result.toObject();
   return otherFields;
@@ -105,5 +112,6 @@ export const userService = {
   registerUserIntoDb,
   userLogin,
   refreshToken,
-  totalUser
+  totalUser,
+  updateRole
 };

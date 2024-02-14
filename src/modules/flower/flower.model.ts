@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { TFlower } from './flower.interface';
+import { TCupon, TFlower } from './flower.interface';
 
 export const FlowerSchema = new Schema<TFlower>(
   {
@@ -57,4 +57,17 @@ export const FlowerSchema = new Schema<TFlower>(
   },
 );
 
+export const CuponSchema = new Schema<TCupon>({
+  cupon: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  discount: {
+    type: Number,
+    required: true,
+  },
+});
+
 export const Flower = model<TFlower>('Flowers', FlowerSchema);
+export const Cupon = model<TCupon>('Cupons', CuponSchema);

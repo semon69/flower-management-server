@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const flowerValidation = z.object({
   body: z.object({
@@ -34,16 +34,25 @@ export const updateFlowerValidation = z.object({
     color: z.string().min(3).max(20).optional(),
     type: z.enum(['roses', 'lilies', 'sunflowers']).optional(),
     size: z.number().min(1).optional(),
-    fragrance: z.enum(['sunflower', 'tulip', 'poppy', 'lotus', 'rose']).optional(),
+    fragrance: z
+      .enum(['sunflower', 'tulip', 'poppy', 'lotus', 'rose'])
+      .optional(),
     season: z
       .string()
       .refine((value) =>
         ['spring', 'summer', 'autumn', 'winter'].includes(value),
-      ).optional(),
+      )
+      .optional(),
     popularity: z
       .string()
-      .refine((value) =>
-        ['low', 'medium', 'high', 'very-high'].includes(value),
-      ).optional(),
+      .refine((value) => ['low', 'medium', 'high', 'very-high'].includes(value))
+      .optional(),
+  }),
+});
+
+export const createCupon = z.object({
+  body: z.object({
+    cupon: z.string(),
+    discount: z.number()
   }),
 });

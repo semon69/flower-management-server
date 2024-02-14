@@ -14,6 +14,19 @@ const totalUsers = catchAsync(async (req, res) => {
   });
 });
 
+const updateRole = catchAsync(async (req, res) => {
+  const id = req.params.id
+  const {role} = req.body
+
+  const result = await userService.updateRole(id, role);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Make Seller successfully',
+    data: result,
+  });
+});
+
 const registerUser = catchAsync(async (req, res) => {
   const result = await userService.registerUserIntoDb(req.body);
   sendResponse(res, {
@@ -55,4 +68,5 @@ export const userController = {
   userLogin,
   refreshToken,
   totalUsers,
+  updateRole
 };

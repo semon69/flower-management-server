@@ -10,7 +10,7 @@ export const UserSchema = new Schema<TUser, UserModel>({
   },
   role: {
     type: String,
-    default: "seller"
+    default: "user"
   },
   email: {
     type: String,

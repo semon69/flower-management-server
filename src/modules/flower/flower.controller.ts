@@ -14,8 +14,7 @@ const createFlower = catchAsync(async (req, res) => {
   });
 });
 
-const getAllFlowers = catchAsync(async (req, res) => { 
-
+const getAllFlowers = catchAsync(async (req, res) => {
   const queryParams: ParsedQs = req.query;
   const result = await flowerService.getFlowersFromDb(queryParams);
   sendResponse(res, {
@@ -58,10 +57,33 @@ const deleteMultipleFlower = catchAsync(async (req, res) => {
   });
 });
 
+const createCupon = catchAsync(async (req, res) => {
+  const result = await flowerService.createCupon(req.body);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Cupon Created successfully',
+    data: result,
+  });
+});
+
+const getSingleCupon = catchAsync(async (req, res) => {
+  const cupon = req.params.cupon;
+  const result = await flowerService.getSingleCupon(cupon);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Get Cupon successfully',
+    data: result,
+  });
+});
+
 export const flowerController = {
   createFlower,
   getAllFlowers,
   updateFlower,
   deleteFlower,
-  deleteMultipleFlower
+  deleteMultipleFlower,
+  createCupon,
+  getSingleCupon,
 };

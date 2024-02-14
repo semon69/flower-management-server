@@ -11,3 +11,8 @@ export type TFlower = {
   season: string;
   popularity: string;
 };
+
+export type TCupon ={
+  cupon: string
+  discount: number
+}

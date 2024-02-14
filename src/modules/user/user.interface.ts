@@ -3,7 +3,7 @@ import { Model } from 'mongoose';
 
 export type TUser = {
   name: string;
-  role: "manager" | "seller"
+  role: "manager" | "seller" | "user"
   email: string;
   password: string;
   gender: string;
