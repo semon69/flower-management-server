@@ -35,6 +35,15 @@ const createMemberIntoBd = async (payload: TMember) => {
   return result;
 };
 
+const getMembers = async () => {
+  const result = await Member.find();
+  if (!result) {
+    throw new Error('Failed to find member');
+  }
+
+  return result;
+};
+
 const getSingleMember = async (email: string) => {
   const result = await Member.findOne({ email });
   if (!result) {
@@ -102,6 +111,7 @@ export const sellService = {
   getSellsFromDb,
   createSellIntoDb,
   createMemberIntoBd,
+  getMembers,
   getSingleMember,
   calculatePoints,
 };

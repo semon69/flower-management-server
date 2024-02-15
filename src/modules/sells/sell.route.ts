@@ -16,7 +16,10 @@ router.post(
 router.get('/sells', sellController.getAllSells);
 
 router.post("/create-member", validateRequest(memberValidation), sellController.createMember)
+
+router.get("/members", sellController.getMembers)
 router.get("/member/:email", sellController.getSingleMember)
+
 router.patch("/calculatePoints", sellController.calculatePoints)
 
 export const SellRoutes = router;

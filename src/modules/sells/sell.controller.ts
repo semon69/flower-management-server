@@ -14,6 +14,16 @@ const createsell = catchAsync(async (req, res) => {
   });
 });
 
+const getMembers = catchAsync(async (req, res) => {
+  const result = await sellService.getMembers();
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'get all member successfully',
+    data: result,
+  });
+});
+
 const getSingleMember = catchAsync(async (req, res) => {
   const email = req.params.email
   const result = await sellService.getSingleMember(email);
@@ -59,6 +69,7 @@ export const sellController = {
   createsell,
   getAllSells,
   createMember,
+  getMembers,
   getSingleMember,
   calculatePoints
 };
