@@ -8,3 +8,10 @@ export const sellValidation = z.object({
     sellDate: z.string()
   }),
 });
+
+export const memberValidation = z.object({
+  body: z.object({
+    name: z.string(),
+    email: z.string()
+  }),
+});

@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Sell } from './sell.model';
-import { TSell } from './sell.interface';
+import { Member, Sell } from './sell.model';
+import { TMember, TSell } from './sell.interface';
 import { ParsedQs } from 'qs';
 import { Flower } from '../flower/flower.model';
 
 const createSellIntoDb = async (payload: TSell) => {
-
   const { flowerId } = payload;
   const fll = await Flower.findById(flowerId);
 
@@ -25,7 +24,47 @@ const createSellIntoDb = async (payload: TSell) => {
   );
 
   return result;
-  
+};
+
+const createMemberIntoBd = async (payload: TMember) => {
+  const result = await Member.create(payload);
+  if (!result) {
+    throw new Error('Failed to create sell');
+  }
+
+  return result;
+};
+
+const getSingleMember = async (email: string) => {
+  const result = await Member.findOne({ email });
+  if (!result) {
+    throw new Error('Failed to find member');
+  }
+
+  return result;
+};
+
+const calculatePoints = async ({
+  email,
+  points,
+  purchaseAmount,
+}: {
+  email: string;
+  points: number;
+  purchaseAmount: number;
+}) => {
+  const result = await Member.findOneAndUpdate(
+    { email },
+    {
+      points: points,
+      totalPurchase: purchaseAmount,
+    },
+  );
+  if (!result) {
+    throw new Error('Failed to calculate');
+  }
+
+  return result;
 };
 
 const getSellsFromDb = async (queryParams: ParsedQs) => {
@@ -62,4 +101,7 @@ const getSellsFromDb = async (queryParams: ParsedQs) => {
 export const sellService = {
   getSellsFromDb,
   createSellIntoDb,
+  createMemberIntoBd,
+  getSingleMember,
+  calculatePoints,
 };

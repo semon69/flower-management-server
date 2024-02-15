@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { TSell } from './sell.interface';
+import { TMember, TSell } from './sell.interface';
 
 export const SellSchema = new Schema<TSell>(
   {
@@ -21,7 +21,33 @@ export const SellSchema = new Schema<TSell>(
     },
     flowerId: {
       type: Schema.Types.ObjectId,
-      required: true 
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  },
+);
+export const MemberSchema = new Schema<TMember>(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    points: {
+      type: Number,
+      required: true,
+      default: 0
+    },
+    totalPurchase: {
+      type: Number,
+      required: true,
+      default: 0
     }
   },
   {
@@ -30,3 +56,4 @@ export const SellSchema = new Schema<TSell>(
 );
 
 export const Sell = model<TSell>('Sells', SellSchema);
+export const Member = model<TMember>('Members', MemberSchema);

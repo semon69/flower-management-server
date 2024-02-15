@@ -8,3 +8,10 @@ export type TSell = {
   sellDate: string;
   flowerId: Types.ObjectId
 };
+
+export type TMember = {
+  name: string
+  email: string
+  points: number
+  totalPurchase: number
+}

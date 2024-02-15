@@ -14,6 +14,36 @@ const createsell = catchAsync(async (req, res) => {
   });
 });
 
+const getSingleMember = catchAsync(async (req, res) => {
+  const email = req.params.email
+  const result = await sellService.getSingleMember(email);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'get member successfully',
+    data: result,
+  });
+});
+const createMember = catchAsync(async (req, res) => {
+  const result = await sellService.createMemberIntoBd(req.body);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Become member successfully',
+    data: result,
+  });
+});
+
+const calculatePoints = catchAsync(async (req, res) => {
+  const result = await sellService.calculatePoints(req.body);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Calculate points successfully',
+    data: result,
+  });
+});
+
 const getAllSells = catchAsync(async (req, res) => {
   const queryParams: ParsedQs = req.query;
   const result = await sellService.getSellsFromDb(queryParams);
@@ -28,4 +58,7 @@ const getAllSells = catchAsync(async (req, res) => {
 export const sellController = {
   createsell,
   getAllSells,
+  createMember,
+  getSingleMember,
+  calculatePoints
 };
