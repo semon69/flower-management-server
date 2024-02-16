@@ -29,8 +29,6 @@ const registerUserIntoDb = async (payload: TUser) => {
 };
 
 const userLogin = async (payload: TLoginUser) => {
-  // checking if the user is exist
-  // const user = await User.isUserExistsUsername(payload?.username);
   const user = await User.findOne({ email: payload?.email });
 
   if (!user) {
@@ -41,11 +39,6 @@ const userLogin = async (payload: TLoginUser) => {
   if (!(await User.isPasswordMatched(payload?.password, user?.password))) {
     throw new AppError(httpStatus.FORBIDDEN, 'Password do not matched');
   }
-
-  // const userData = {
-  //   role: user?.role,
-  //   email: user?.email,
-  // };
 
   const jwtPayload = {
     role: user?.role,
