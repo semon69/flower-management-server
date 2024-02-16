@@ -40,7 +40,7 @@ The Flower Management Dashboard is a comprehensive web application designed for 
 
 1. _Clone the repository:_
 
-   git clone 
+   git clone https://github.com/Porgramming-Hero-web-course/l2-b2-assignment-6-backend-semon69.git
 
    cd _folder name_
 
@@ -74,4 +74,4 @@ For a complete and up-to-date list of dependencies with their versions, refer to
 
 ## Live Demo
 
-Visit the live demo of the Flower Management Dashboard [here](). Feel free to explore the features and functionalities!
+Visit the live demo of the Flower Management Dashboard [here](https://flower-management-client-kappa.vercel.app/). Feel free to explore the features and functionalities!
