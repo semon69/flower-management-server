@@ -9,7 +9,7 @@ The Flower Management Dashboard is a comprehensive web application designed for 
 - _User Registration and Login:_
   - Users must register and log in to access the dashboard.
   - Secure authentication using JSON Web Tokens (JWT).
-  - Single role: User responsible for managing the system.
+  - Single role: Basicaly there is two role seller and manager but when someone register first time they get user role. Then manager change there role.
 
 ### Flower Management
 
