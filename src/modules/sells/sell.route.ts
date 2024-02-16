@@ -21,5 +21,6 @@ router.get("/members", sellController.getMembers)
 router.get("/member/:email", sellController.getSingleMember)
 
 router.patch("/calculatePoints", sellController.calculatePoints)
+router.patch("/updateRedeem/:email", sellController.updateRedeemStatus)
 
 export const SellRoutes = router;

@@ -54,6 +54,17 @@ const calculatePoints = catchAsync(async (req, res) => {
   });
 });
 
+const updateRedeemStatus = catchAsync(async (req, res) => {
+  const email = req.params.email
+  const result = await sellService.updateRedeemStatus(email);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Now you can use your point when buy products',
+    data: result,
+  });
+});
+
 const getAllSells = catchAsync(async (req, res) => {
   const queryParams: ParsedQs = req.query;
   const result = await sellService.getSellsFromDb(queryParams);
@@ -71,5 +82,6 @@ export const sellController = {
   createMember,
   getMembers,
   getSingleMember,
-  calculatePoints
+  calculatePoints,
+  updateRedeemStatus
 };

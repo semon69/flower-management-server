@@ -75,6 +75,13 @@ const calculatePoints = async ({
 
   return result;
 };
+const updateRedeemStatus = async (email: string) => {
+  const result = await Member.updateOne(
+    { email },
+    { $set: { isRedeem: true } },
+  );
+  return result;
+};
 
 const getSellsFromDb = async (queryParams: ParsedQs) => {
   let startDate;
@@ -114,4 +121,5 @@ export const sellService = {
   getMembers,
   getSingleMember,
   calculatePoints,
+  updateRedeemStatus,
 };

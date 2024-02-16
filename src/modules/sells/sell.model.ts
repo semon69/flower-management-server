@@ -48,6 +48,10 @@ export const MemberSchema = new Schema<TMember>(
       type: Number,
       required: true,
       default: 0
+    },
+    isRedeem: {
+      type: Boolean,
+      default: false
     }
   },
   {

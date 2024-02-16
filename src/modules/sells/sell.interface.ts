@@ -14,4 +14,5 @@ export type TMember = {
   email: string
   points: number
   totalPurchase: number
+  isRedeem: boolean
 }
